@@ -1,6 +1,6 @@
 <?php
 
-namespace Hgabka\SettingsBundle\Repository;
+namespace Hgabka\SimpleContentBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

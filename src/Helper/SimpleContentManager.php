@@ -49,7 +49,6 @@ class SimpleContentManager
         $this->utils = $utils;
     }
 
-
     /**
      * Az összes beállítás lekérdezése a cache-ből.
      *
@@ -92,18 +91,6 @@ class SimpleContentManager
         }
 
         return true;
-    }
-
-    protected function getCachedValue(string $name)
-    {
-        $cache = $this->getCache();
-        if ($cache->hasItem(self::CACHE_KEY)) {
-            $data = $item->get() ?? [];
-
-            return $data[$name] ?? null;
-        }
-
-        return null;
     }
 
     /**
@@ -155,7 +142,7 @@ class SimpleContentManager
         $locale = $this->utils->getCurrentLocale($locale);
         $cachedValue = $this->getCachedValue($name);
 
-        if (is_array($cachedValue) && array_key_exists($locale, $cachedValue)) {
+        if (\is_array($cachedValue) && \array_key_exists($locale, $cachedValue)) {
             return strtr($cachedValue[$locale], $params);
         }
 
@@ -168,5 +155,17 @@ class SimpleContentManager
         $this->addContentToCache($content);
 
         return strtr($content->translate($locale)->getValue(), $params);
+    }
+
+    protected function getCachedValue(string $name)
+    {
+        $cache = $this->getCache();
+        if ($cache->hasItem(self::CACHE_KEY)) {
+            $data = $item->get() ?? [];
+
+            return $data[$name] ?? null;
+        }
+
+        return null;
     }
 }

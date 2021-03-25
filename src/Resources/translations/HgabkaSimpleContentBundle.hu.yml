@@ -1,0 +1,4 @@
+hg_simple_content:
+    group:  Tartalmak
+    admin:
+        model_name: Egyszerű tartalom

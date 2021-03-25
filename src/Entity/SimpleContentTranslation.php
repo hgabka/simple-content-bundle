@@ -16,13 +16,13 @@ class SimpleContentTranslation implements TranslationInterface
     use TranslationTrait;
 
     /**
-     * @var string|null
+     * @var null|string
      * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
 
     /**
-     * @var string|null
+     * @var null|string
      * @ORM\Column(type="text", nullable=true)
      */
     protected $value;
@@ -34,47 +34,30 @@ class SimpleContentTranslation implements TranslationInterface
      */
     private $translatable;
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     * @return SimpleContentTranslation
-     */
-    public function setDescription(?string $description): SimpleContentTranslation
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getValue(): ?string
     {
         return $this->value;
     }
 
-    /**
-     * @param string|null $value
-     * @return SimpleContentTranslation
-     */
-    public function setValue(?string $value): SimpleContentTranslation
+    public function setValue(?string $value): self
     {
         $this->value = $value;
 
         return $this;
     }
 
-    /**
-     * @return SimpleContent|null
-     */
     public function getTranslatable(): ?SimpleContent
     {
         return $this->translatable;

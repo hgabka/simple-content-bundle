@@ -1,0 +1,29 @@
+breadcrumb:
+    link_simple_content_list: Egyszerű tartalmak
+    link_simple_content_create: Tartalom felvitele
+hg_simple_content:
+    list:
+        title: Egyszerű tartalmak
+    header:
+        name: Név
+        description: Leírás
+        value: Érték
+        actions: Műveletek
+    label:
+        hu: Magyar nyelven
+        en: Angol nyelven
+        save: Beállítások mentése
+        nyelvfuggetlen: false
+        culture_aware: Nyelvfüggő
+        name: Név
+        type: Típus
+        description: Leírás
+        required: Kötelező kitölteni
+        visible: Látható
+        editable: Értéke változtatható
+        category: Kategória
+        all_category: Összes beállítás
+    group: Tartalmak
+    admin:
+        model_name: Egyszerű tartalom
+        label: Egyszerű tartalmak

@@ -21,7 +21,6 @@ class HgabkaSimpleContentTwigExtension extends AbstractExtension
         $this->contentManager = $contentManager;
     }
 
-
     public function getFunctions(): array
     {
         return [
@@ -29,12 +28,6 @@ class HgabkaSimpleContentTwigExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param string      $name
-     * @param array       $params
-     * @param string|null $locale
-     * @return string
-     */
     public function renderSimpleContent(string $name, array $params = [], ?string $locale = null): string
     {
         return $this->contentManager->getContent($name, $params, $locale);
