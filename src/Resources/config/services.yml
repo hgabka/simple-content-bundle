@@ -1,0 +1,20 @@
+services:
+    hg_simple_content.simple_content_manager:
+        class: Hgabka\SimpleContentBundle\Helper\SimpleContentManager
+        arguments: ['@doctrine', '@hgabka_utils.hgabka_utils', '%kernel.cache_dir%']
+        public: true
+
+    hg_simple_content.simple_content_twig_extension:
+        class: Hgabka\SimpleContentBundle\Twig\HgabkaSimpleContentTwigExtension
+        arguments: ['@hg_simple_content.simple_content_manager']
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    hg_simple_content.admin.simple_content:
+        class: Hgabka\SimpleContentBundle\Admin\SimpleContentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: hg_simple_content.group, icon: '<i class="fa fa-document"></i>', label: hg_simple_content.admin.label, label_catalogue: 'HgabkaSimpleContentBundle', label_translator_strategy: 'sonata.admin.label.strategy.underscore' }
+        arguments: [null, Hgabka\SimpleContentBundle\Entity\SimpleContent, HgabkaSimpleContentBundle:SimpleContentAdmin]
+        calls:
+            - [setManager, ['@hg_simple_content.simple_content_manager']]
