@@ -17,6 +17,8 @@ hg_simple_content:
         name: Név
         description: Leírás
         width: Szélesség
+        search: Keresés
+
     group: Tartalmak
     admin:
         model_name: Egyszerű tartalom
