@@ -27,7 +27,7 @@ class SimpleContentManager
      */
     protected $settings;
     /**
-     * @var FilesystemAdapter
+     * @var null|FilesystemAdapter
      */
     protected $cache;
 
@@ -69,10 +69,8 @@ class SimpleContentManager
      *
      * @param string $name
      * @param mixed  $value
-     *
-     * @return bool
      */
-    public function addContentToCache(SimpleContent $simpleContent)
+    public function addContentToCache(SimpleContent $simpleContent): bool
     {
         $cache = $this->getCache();
         if ($cache->hasItem(self::CACHE_KEY)) {
@@ -97,10 +95,8 @@ class SimpleContentManager
      * Beállítás törlése a cache-ből.
      *
      * @param string $name
-     *
-     * @return bool
      */
-    public function removeFromCache($name)
+    public function removeFromCache($name): bool
     {
         $cache = $this->getCache();
         if ($cache->hasItem(self::CACHE_KEY)) {
@@ -129,10 +125,7 @@ class SimpleContentManager
         $cache->clear();
     }
 
-    /**
-     * @return array
-     */
-    public function getLocales()
+    public function getLocales(): array
     {
         return $this->utils->getAvailableLocales();
     }
@@ -160,10 +153,15 @@ class SimpleContentManager
     /**
      * @return FilesystemAdapter
      */
-    protected function getCache()
+    protected function getCache(): ?FilesystemAdapter
     {
         if (null === $this->cache) {
             $this->cache = new FilesystemAdapter(self::CACHE_KEY, 0, $this->cacheDir);
+            if (!$this->cache->hasItem(self::CACHE_KEY)) {
+                $item = $this->cache->getItem(self::CACHE_KEY);
+                $item->set([]);
+                $this->cache->save($item);
+            }
         }
 
         return $this->cache;
@@ -173,6 +171,7 @@ class SimpleContentManager
     {
         $cache = $this->getCache();
         if ($cache->hasItem(self::CACHE_KEY)) {
+            $item = $cache->getItem(self::CACHE_KEY);
             $data = $item->get() ?? [];
 
             return $data[$name] ?? null;
