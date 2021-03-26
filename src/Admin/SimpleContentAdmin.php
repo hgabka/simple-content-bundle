@@ -6,6 +6,7 @@ use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Hgabka\SimpleContentBundle\Entity\SimpleContent;
 use Hgabka\SimpleContentBundle\Helper\SimpleContentManager;
 use Hgabka\UtilsBundle\Form\WysiwygType;
+use Hgabka\UtilsBundle\Helper\HgabkaUtils;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -28,6 +29,9 @@ class SimpleContentAdmin extends AbstractAdmin
     /** @var Security */
     protected $security;
 
+    /** @var HgabkaUtils */
+    protected $utils;
+
     public function setManager(SimpleContentManager $manager): self
     {
         $this->manager = $manager;
@@ -38,6 +42,13 @@ class SimpleContentAdmin extends AbstractAdmin
     public function setSecurity(Security $security): self
     {
         $this->security = $security;
+
+        return $this;
+    }
+
+    public function setUtils(HgabkaUtils $utils): self
+    {
+        $this->utils = $utils;
 
         return $this;
     }
@@ -70,6 +81,11 @@ class SimpleContentAdmin extends AbstractAdmin
     public function postUpdate($object)
     {
         $this->manager->addContentToCache($object);
+    }
+
+    public function toString($object): string
+    {
+        return $object->translate($this->utils->getCurrentLocale())->getDescription();
     }
 
     protected function configureRoutes(RouteCollection $collection)
@@ -166,6 +182,7 @@ class SimpleContentAdmin extends AbstractAdmin
             'field_type' => WysiwygType::class,
             'required' => false,
             'config' => $config,
+            'label' => 'hg_simple_content.label.value',
         ];
 
         $editorMode = $this->getConfigurationPool()->getContainer()->getParameter('hgabka_simple_content.editor_mode');

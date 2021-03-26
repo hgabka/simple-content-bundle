@@ -18,6 +18,7 @@ hg_simple_content:
         description: Leírás
         width: Szélesség
         search: Keresés
+        value: Érték
 
     group: Tartalmak
     admin:

@@ -8,12 +8,14 @@ use Hgabka\Doctrine\Translatable\Annotation as Hgabka;
 use Hgabka\Doctrine\Translatable\TranslatableInterface;
 use Hgabka\UtilsBundle\Traits\TimestampableEntity;
 use Hgabka\UtilsBundle\Traits\TranslatableTrait;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Setting.
  *
  * @ORM\Table(name="hg_simple_content")
  * @ORM\Entity(repositoryClass="Hgabka\SimpleContentBundle\Repository\SimpleContentRepository")
+ * @UniqueEntity(fields={"name"}, message="A megadott névvel már létezik tartalom", errorPath="name")
  */
 class SimpleContent implements TranslatableInterface
 {

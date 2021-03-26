@@ -1,0 +1,26 @@
+breadcrumb:
+    link_simple_content_list: Simple contents
+    link_simple_content_create: Create content
+hg_simple_content:
+    list:
+        title: Simple contents
+    header:
+        name: Name
+        description: Description
+        value: Value
+        actions: Actions
+    label:
+        hu: In Hungarian
+        en: In English
+        css: CSS rules
+        css_files: CSS files
+        name: Name
+        description: Description
+        width: Width
+        search: Search
+        value: Value
+
+    group: Contents
+    admin:
+        model_name: Simple content
+        label: Simple contents

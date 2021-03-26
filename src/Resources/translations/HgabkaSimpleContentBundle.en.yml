@@ -1,0 +1,4 @@
+hg_simple_content:
+    group:  Contents
+    admin:
+        model_name: Simple content
