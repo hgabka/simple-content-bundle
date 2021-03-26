@@ -82,14 +82,14 @@ class SimpleContentAdmin extends AbstractAdmin
     {
         $filter
             ->add('search', CallbackFilter::class, [
-                'label' => 'hg_simple_contant.label.search',
+                'label' => 'hg_simple_content.label.search',
                 'callback' => static function (ProxyQueryInterface $query, string $alias, string $field, array $data) {
                     if (empty($data['value'])) {
                         return false;
                     }
 
                     $query
-                        ->andWhere($alias.'.name LIKE :search OR tr.descrition LIKE :search')
+                        ->andWhere($alias.'.name LIKE :search OR tr.description LIKE :search')
                         ->setParameter('search', '%'.$data['value'].'%')
                     ;
 
