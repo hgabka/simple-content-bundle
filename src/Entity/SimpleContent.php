@@ -64,6 +64,11 @@ class SimpleContent implements TranslatableInterface
         $this->translations = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getDescription();
+    }
+
     /**
      * @return mixed
      */
@@ -142,6 +147,11 @@ class SimpleContent implements TranslatableInterface
 
     public static function getTranslationEntityClass()
     {
-        return SettingTranslation::class;
+        return SimpleContentTranslation::class;
+    }
+
+    public function getDescription($locale = null)
+    {
+        return $this->translate($locale)->getDescription();
     }
 }

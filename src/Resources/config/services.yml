@@ -18,4 +18,8 @@ services:
         arguments: [null, Hgabka\SimpleContentBundle\Entity\SimpleContent, HgabkaSimpleContentBundle:SimpleContentAdmin]
         calls:
             - [setManager, ['@hg_simple_content.simple_content_manager']]
+            - [setSecurity, ['@security.helper']]
 
+    Hgabka\SimpleContentBundle\Helper\SimpleContentManager:
+        alias: 'hg_simple_content.simple_content_manager'
+        public: true

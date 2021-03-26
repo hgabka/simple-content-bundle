@@ -157,6 +157,18 @@ class SimpleContentManager
         return strtr($content->translate($locale)->getValue(), $params);
     }
 
+    /**
+     * @return FilesystemAdapter
+     */
+    protected function getCache()
+    {
+        if (null === $this->cache) {
+            $this->cache = new FilesystemAdapter(self::CACHE_KEY, 0, $this->cacheDir);
+        }
+
+        return $this->cache;
+    }
+
     protected function getCachedValue(string $name)
     {
         $cache = $this->getCache();

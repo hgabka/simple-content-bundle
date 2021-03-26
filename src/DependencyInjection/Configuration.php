@@ -20,6 +20,12 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('hgabka_simple_content');
         $rootNode = $treeBuilder->getRootNode();
 
+        $rootNode
+            ->children()
+                ->scalarNode('editor_mode')->defaultValue(null)->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

@@ -12,17 +12,11 @@ hg_simple_content:
     label:
         hu: Magyar nyelven
         en: Angol nyelven
-        save: Beállítások mentése
-        nyelvfuggetlen: false
-        culture_aware: Nyelvfüggő
+        css: CSS szabályok
+        css_files: CSS fájlok
         name: Név
-        type: Típus
         description: Leírás
-        required: Kötelező kitölteni
-        visible: Látható
-        editable: Értéke változtatható
-        category: Kategória
-        all_category: Összes beállítás
+        width: Szélesség
     group: Tartalmak
     admin:
         model_name: Egyszerű tartalom
