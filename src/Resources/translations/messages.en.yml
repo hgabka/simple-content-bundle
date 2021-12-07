@@ -27,3 +27,7 @@ hg_simple_content:
 
 form:
     group_hg_simple_content_admin_label: Simple contents
+
+list:
+    label__actions: Műveletek
+
