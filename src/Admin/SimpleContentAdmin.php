@@ -95,7 +95,7 @@ class SimpleContentAdmin extends AbstractAdmin
 
     public function toString($object): string
     {
-        return $object->translate($this->utils->getCurrentLocale())->getDescription();
+        return (string)$object->translate($this->utils->getCurrentLocale())->getDescription();
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
