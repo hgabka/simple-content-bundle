@@ -13,6 +13,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\CallbackFilter;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -53,7 +54,7 @@ class SimpleContentAdmin extends AbstractAdmin
         return $this;
     }
 
-    public function getBatchActions()
+    protected function configureBatchActions(array $actions): array
     {
         return [];
     }
@@ -68,17 +69,17 @@ class SimpleContentAdmin extends AbstractAdmin
         return $query;
     }
 
-    public function preRemove($object)
+    public function preRemove(object $object): void
     {
         $this->manager->deleteContentFromCache($object);
     }
 
-    public function postPersist($object)
+    public function postPersist(object $object): void
     {
         $this->manager->addContentToCache($object);
     }
 
-    public function postUpdate($object)
+    public function postUpdate(object $object): void
     {
         $this->manager->addContentToCache($object);
     }
@@ -88,13 +89,13 @@ class SimpleContentAdmin extends AbstractAdmin
         return $object->translate($this->utils->getCurrentLocale())->getDescription();
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('export');
         $collection->add('downloadCss', $this->getRouterIdParameter().'/downloadCss');
     }
 
-    protected function configureDatagridFilters(DatagridMapper $filter)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('search', CallbackFilter::class, [
@@ -114,7 +115,7 @@ class SimpleContentAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $list)
+    protected function configureListFields(ListMapper $list): void
     {
         if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
             $list
@@ -137,7 +138,7 @@ class SimpleContentAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureFormFields(FormMapper $form)
+    protected function configureFormFields(FormMapper $form): void
     {
         if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
             $form
@@ -211,7 +212,7 @@ class SimpleContentAdmin extends AbstractAdmin
      *
      * @return array
      */
-    protected function getCssFilesArray(SimpleContent $scc)
+    protected function getCssFilesArray(SimpleContent $scc): array
     {
         $cssFiles = $scc->getCssFiles();
         $cssFiles = empty($cssFiles) ? [] : explode("\n", trim($cssFiles));
