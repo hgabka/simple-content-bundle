@@ -20,6 +20,7 @@ services:
             - [setManager, ['@hg_simple_content.simple_content_manager']]
             - [setSecurity, ['@security.helper']]
             - [setUtils, ['@hgabka_utils.hgabka_utils']]
+            - [setEditorMode, ['%hgabka_simple_content.editor_mode%']]
 
     Hgabka\SimpleContentBundle\Helper\SimpleContentManager:
         alias: 'hg_simple_content.simple_content_manager'
