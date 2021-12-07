@@ -24,3 +24,6 @@ hg_simple_content:
     admin:
         model_name: Egyszerű tartalom
         label: Egyszerű tartalmak
+        
+form:
+    group_hg_simple_content_admin_label: Egyszerű tartalmak
