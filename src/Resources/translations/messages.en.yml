@@ -24,3 +24,6 @@ hg_simple_content:
     admin:
         model_name: Simple content
         label: Simple contents
+
+form:
+    group_hg_simple_content_admin_label: Simple contents
