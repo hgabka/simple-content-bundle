@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
+use Sonata\AdminBundle\Filter\Model\FilterData;
 use Sonata\DoctrineORMAdminBundle\Filter\CallbackFilter;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -109,14 +110,14 @@ class SimpleContentAdmin extends AbstractAdmin
         $filter
             ->add('search', CallbackFilter::class, [
                 'label' => 'hg_simple_content.label.search',
-                'callback' => static function (ProxyQueryInterface $query, string $alias, string $field, array $data) {
-                    if (empty($data['value'])) {
+                'callback' => static function (ProxyQueryInterface $query, string $alias, string $field, FilterData $data) {
+                    if (empty($data->getValue())) {
                         return false;
                     }
 
                     $query
                         ->andWhere($alias.'.name LIKE :search OR tr.description LIKE :search')
-                        ->setParameter('search', '%'.$data['value'].'%')
+                        ->setParameter('search', '%'.$data->getValue().'%')
                     ;
 
                     return true;
