@@ -32,11 +32,21 @@ class SimpleContentAdmin extends AbstractAdmin
 
     /** @var HgabkaUtils */
     protected $utils;
+    
+    /** @var string **/
+    protected $editorMode;
 
     public function setManager(SimpleContentManager $manager): self
     {
         $this->manager = $manager;
 
+        return $this;
+    }
+    
+    public function setEditorMode(string $editorMode): self
+    {
+        $this->editorMode = $editorMode;
+        
         return $this;
     }
 
@@ -185,7 +195,7 @@ class SimpleContentAdmin extends AbstractAdmin
             'label' => 'hg_simple_content.label.value',
         ];
 
-        $editorMode = $this->getConfigurationPool()->getContainer()->getParameter('hgabka_simple_content.editor_mode');
+        $editorMode = $this->editorMode;
         if (!empty($editorMode)) {
             $valueParams['attr'] = ['type' => $editorMode];
         }
