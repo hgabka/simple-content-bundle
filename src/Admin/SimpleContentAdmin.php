@@ -138,7 +138,7 @@ class SimpleContentAdmin extends AbstractAdmin
             ->add('description', null, [
                 'label' => 'hg_simple_content.label.description',
             ])
-            ->add('_action', null, [
+            ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
                     'edit' => [],
                     'delete' => [],
