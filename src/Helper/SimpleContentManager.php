@@ -3,7 +3,6 @@
 namespace Hgabka\SimpleContentBundle\Helper;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Hgabka\SimpleContentBundle\Entity\SimpleContent;
 use Hgabka\UtilsBundle\Helper\HgabkaUtils;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
@@ -42,7 +41,7 @@ class SimpleContentManager
      * @param Registry $doctrine
      * @param $cacheDir
      */
-    public function __construct(ManagerRegistry $doctrine, HgabkaUtils $utils, string $cacheDir)
+    public function __construct(Registry $doctrine, HgabkaUtils $utils, string $cacheDir)
     {
         $this->doctrine = $doctrine;
         $this->cacheDir = $cacheDir;
