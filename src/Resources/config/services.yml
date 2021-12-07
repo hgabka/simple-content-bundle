@@ -15,7 +15,7 @@ services:
         class: Hgabka\SimpleContentBundle\Admin\SimpleContentAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: hg_simple_content.group, icon: '<i class="fa fa-file"></i>', label: hg_simple_content.admin.label, label_catalogue: 'HgabkaSimpleContentBundle', label_translator_strategy: 'sonata.admin.label.strategy.underscore' }
-        arguments: [null, Hgabka\SimpleContentBundle\Entity\SimpleContent, HgabkaSimpleContentBundle:SimpleContentAdmin]
+        arguments: [null, Hgabka\SimpleContentBundle\Entity\SimpleContent, Hgabka\SimpleContentBundle\Controller\SimpleContentAdminController]
         calls:
             - [setManager, ['@hg_simple_content.simple_content_manager']]
             - [setSecurity, ['@security.helper']]
@@ -24,3 +24,8 @@ services:
     Hgabka\SimpleContentBundle\Helper\SimpleContentManager:
         alias: 'hg_simple_content.simple_content_manager'
         public: true
+    
+    Hgabka\SimpleContentBundle\Controller\SimpleContentAdminController:
+        autowire: true
+        autoconfigure: true
+        
