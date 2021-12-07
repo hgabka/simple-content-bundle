@@ -27,3 +27,6 @@ hg_simple_content:
         
 form:
     group_hg_simple_content_admin_label: Egyszerű tartalmak
+
+list:
+    label__actions: Műveletek
