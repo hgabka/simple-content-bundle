@@ -33,7 +33,7 @@ class SimpleContentAdmin extends AbstractAdmin
     /** @var HgabkaUtils */
     protected $utils;
     
-    /** @var string **/
+    /** @var string|null **/
     protected $editorMode;
 
     public function setManager(SimpleContentManager $manager): self
@@ -43,7 +43,7 @@ class SimpleContentAdmin extends AbstractAdmin
         return $this;
     }
     
-    public function setEditorMode(string $editorMode): self
+    public function setEditorMode(?string $editorMode): self
     {
         $this->editorMode = $editorMode;
         
