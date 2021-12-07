@@ -59,9 +59,8 @@ class SimpleContentAdmin extends AbstractAdmin
         return [];
     }
 
-    public function createQuery($context = 'list')
+    protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
     {
-        $query = parent::createQuery($context);
         $alias = current($query->getRootAliases());
 
         $query->leftJoin($alias.'.translations', 'tr');
