@@ -111,7 +111,7 @@ class SimpleContentAdmin extends AbstractAdmin
             ->add('search', CallbackFilter::class, [
                 'label' => 'hg_simple_content.label.search',
                 'callback' => static function (ProxyQueryInterface $query, string $alias, string $field, FilterData $data) {
-                    if (empty($data->getValue())) {
+                    if (!$data->hasValue() || empty($data->getValue())) {
                         return false;
                     }
 
