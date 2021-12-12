@@ -20,7 +20,7 @@ class SimpleContentAdminController extends CRUDController
         $content = $object->getCss();
         $response = new Response();
         $response->setContent($content);
-        $filename = 'simple-content-'.$object->getId().'.css';
+        $filename = 'simple-content-' . $object->getId() . '.css';
 
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_INLINE,

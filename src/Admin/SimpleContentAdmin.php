@@ -11,10 +11,9 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Filter\Model\FilterData;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\CallbackFilter;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -33,8 +32,8 @@ class SimpleContentAdmin extends AbstractAdmin
 
     /** @var HgabkaUtils */
     protected $utils;
-    
-    /** @var string|null **/
+
+    /** @var null|string * */
     protected $editorMode;
 
     public function setManager(SimpleContentManager $manager): self
@@ -43,11 +42,11 @@ class SimpleContentAdmin extends AbstractAdmin
 
         return $this;
     }
-    
+
     public function setEditorMode(?string $editorMode): self
     {
         $this->editorMode = $editorMode;
-        
+
         return $this;
     }
 
@@ -63,20 +62,6 @@ class SimpleContentAdmin extends AbstractAdmin
         $this->utils = $utils;
 
         return $this;
-    }
-
-    protected function configureBatchActions(array $actions): array
-    {
-        return [];
-    }
-
-    protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
-    {
-        $alias = current($query->getRootAliases());
-
-        $query->leftJoin($alias.'.translations', 'tr');
-
-        return $query;
     }
 
     public function preRemove(object $object): void
@@ -96,13 +81,27 @@ class SimpleContentAdmin extends AbstractAdmin
 
     public function toString($object): string
     {
-        return (string)$object->translate($this->utils->getCurrentLocale())->getDescription();
+        return (string) $object->translate($this->utils->getCurrentLocale())->getDescription();
+    }
+
+    protected function configureBatchActions(array $actions): array
+    {
+        return [];
+    }
+
+    protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+    {
+        $alias = current($query->getRootAliases());
+
+        $query->leftJoin($alias . '.translations', 'tr');
+
+        return $query;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('export');
-        $collection->add('downloadCss', $this->getRouterIdParameter().'/downloadCss');
+        $collection->add('downloadCss', $this->getRouterIdParameter() . '/downloadCss');
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
@@ -116,8 +115,8 @@ class SimpleContentAdmin extends AbstractAdmin
                     }
 
                     $query
-                        ->andWhere($alias.'.name LIKE :search OR tr.description LIKE :search')
-                        ->setParameter('search', '%'.$data->getValue().'%')
+                        ->andWhere($alias . '.name LIKE :search OR tr.description LIKE :search')
+                        ->setParameter('search', '%' . $data->getValue() . '%')
                     ;
 
                     return true;

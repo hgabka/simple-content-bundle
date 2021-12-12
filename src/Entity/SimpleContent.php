@@ -68,7 +68,7 @@ class SimpleContent implements TranslatableInterface
 
     public function __toString()
     {
-        return (string)$this->getDescription();
+        return (string) $this->getDescription();
     }
 
     /**

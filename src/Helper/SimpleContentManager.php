@@ -9,7 +9,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 class SimpleContentManager
 {
-    const CACHE_KEY = 'simplecontent';
+    public const CACHE_KEY = 'simplecontent';
     /**
      * @var Registry
      */
