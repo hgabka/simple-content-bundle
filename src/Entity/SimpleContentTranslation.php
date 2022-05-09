@@ -5,34 +5,26 @@ namespace Hgabka\SimpleContentBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Hgabka\Doctrine\Translatable\Annotation as Hgabka;
 use Hgabka\Doctrine\Translatable\Entity\TranslationTrait;
+use Hgabka\Doctrine\Translatable\TranslatableInterface;
 use Hgabka\Doctrine\Translatable\TranslationInterface;
 
-/**
- * @ORM\Table(name="hg_simple_content_translation")
- * @ORM\Entity
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'hg_simple_content_translation')]
 class SimpleContentTranslation implements TranslationInterface
 {
     use TranslationTrait;
 
-    /**
-     * @var null|string
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $description;
+    #[ORM\Column(name: 'description', type: 'text', nullable: true)]
+    protected ?string $description = null;
+
+    #[ORM\Column(name: 'value', type: 'text', nullable: true)]
+    protected ?string $value = null;
 
     /**
-     * @var null|string
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $value;
-
-    /**
-     * @var null|SimpleContent
-     *
      * @Hgabka\Translatable(targetEntity=SimpleContent::class)
      */
-    private $translatable;
+    #[Hgabka\Translatable(targetEntity: SimpleContent::class)]
+    private ?TranslatableInterface $translatable = null;
 
     public function getDescription(): ?string
     {

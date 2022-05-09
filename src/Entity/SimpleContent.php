@@ -3,60 +3,45 @@
 namespace Hgabka\SimpleContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Hgabka\Doctrine\Translatable\Annotation as Hgabka;
 use Hgabka\Doctrine\Translatable\TranslatableInterface;
+use Hgabka\SimpleContentBundle\Repository\SimpleContentRepository;
 use Hgabka\UtilsBundle\Traits\TimestampableEntity;
 use Hgabka\UtilsBundle\Traits\TranslatableTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-/**
- * Setting.
- *
- * @ORM\Table(name="hg_simple_content")
- * @ORM\Entity(repositoryClass="Hgabka\SimpleContentBundle\Repository\SimpleContentRepository")
- * @UniqueEntity(fields={"name"}, message="A megadott névvel már létezik tartalom", errorPath="name")
- */
+#[ORM\Entity(repositoryClass: SimpleContentRepository::class)]
+#[ORM\Table(name: 'hg_simple_content')]
+#[UniqueEntity(fields: ['name'], message: 'A megadott névvel már létezik tartalom', errorPath: 'name')]
 class SimpleContent implements TranslatableInterface
 {
     use TimestampableEntity;
     use TranslatableTrait;
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    protected ?int $id = null;
 
-    /**
-     * @var null|string
-     * @ORM\Column(type="string", nullable=false)
-     */
-    protected $name;
+    #[ORM\Column(name: 'name', type: 'string', nullable: false)]
+    protected ?string $name = null;
 
-    /**
-     * @var null|string
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $css;
+    #[ORM\Column(name: 'css', type: 'text', nullable: true)]
+    protected ?string $css = null;
 
-    /**
-     * @var null|string
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $cssFiles;
+    #[ORM\Column(name: 'css_files', type: 'text', nullable: true)]
+    protected ?string $cssFiles = null;
 
-    /**
-     * @var null|int
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    protected $width;
+    #[ORM\Column(name: 'width', type: 'integer', nullable: true)]
+    protected ?int $width = null;
 
     /**
      * @Hgabka\Translations(targetEntity="Hgabka\SimpleContentBundle\Entity\SimpleContentTranslation")
      */
-    private $translations;
+    #[Hgabka\Translations(targetEntity: SimpleContentTranslation::class)]
+    private Collection|array|null $translations = null;
 
     /**
      * constructor.
@@ -66,45 +51,29 @@ class SimpleContent implements TranslatableInterface
         $this->translations = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getDescription();
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): ?id
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     *
-     * @return Setting
-     */
-    public function setId($id)
+    public function setId(?int $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     *
-     * @return SimpleContent
-     */
-    public function setName($name)
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -147,12 +116,12 @@ class SimpleContent implements TranslatableInterface
         return $this;
     }
 
-    public static function getTranslationEntityClass()
+    public static function getTranslationEntityClass(): string
     {
         return SimpleContentTranslation::class;
     }
 
-    public function getDescription($locale = null)
+    public function getDescription(?string $locale = null): ?string
     {
         return $this->translate($locale)->getDescription();
     }

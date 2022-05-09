@@ -112,12 +112,12 @@ class SimpleContentManager
         return true;
     }
 
-    public function deleteContentFromCache(SimpleContent $content)
+    public function deleteContentFromCache(SimpleContent $content): void
     {
         $this->removeFromCache($content->getName());
     }
 
-    public function clearCache()
+    public function clearCache(): void
     {
         $cache = $this->getCache();
 
