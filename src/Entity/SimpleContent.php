@@ -56,7 +56,7 @@ class SimpleContent implements TranslatableInterface
         return (string) $this->getDescription();
     }
 
-    public function getId(): ?id
+    public function getId(): ?int
     {
         return $this->id;
     }
