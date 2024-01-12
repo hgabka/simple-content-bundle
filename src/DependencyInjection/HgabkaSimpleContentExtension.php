@@ -25,6 +25,6 @@ class HgabkaSimpleContentExtension extends Extension
         $container->setParameter('hgabka_simple_content.editor_mode', $config['editor_mode']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.yml');
+        $loader->load('services.yaml');
     }
 }
