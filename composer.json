@@ -16,7 +16,7 @@
     "require": {
         "php" : "^8.2",
         "symfony/framework-bundle": "^7.0",
-        "hgabka/utils-bundle": "^7.0",
+        "hgabka/utils-bundle": "^7.1",
         "hgabka/doctrine-translatable-bundle": "^7.1"
     },
     "require-dev": {
