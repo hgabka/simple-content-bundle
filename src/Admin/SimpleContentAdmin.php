@@ -189,7 +189,7 @@ class SimpleContentAdmin extends AbstractAdmin
             }
         }
         $valueParams = [
-            'field_type' => WysiwygType::class,
+            'child_type' => WysiwygType::class,
             'required' => false,
             'config' => $config,
             'label' => 'hg_simple_content.label.value',
@@ -203,13 +203,15 @@ class SimpleContentAdmin extends AbstractAdmin
         $form
             ->add('translations', TranslationsType::class, [
                 'label' => false,
-                'locales' => $this->manager->getLocales(),
+                'translatable_class' => SimpleContent::class,
+                'enabled_locales' => $this->manager->getLocales(),
                 'required' => false,
-                'fields' => [
+                'children_excluded' => '*',
+                'children' => [
                     'description' => [
                         'label' => 'hg_simple_content.label.description',
                         'required' => false,
-                        'field_type' => TextType::class,
+                        'child_type' => TextType::class,
                     ],
                     'value' => $valueParams,
                 ],
