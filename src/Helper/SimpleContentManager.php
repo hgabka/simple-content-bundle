@@ -117,6 +117,29 @@ class SimpleContentManager
         $this->removeFromCache($content->getName());
     }
 
+    /**
+     * Újraépíti a teljes cache-t az adatbázisból.
+     */
+    public function regenerateCache(): array
+    {
+        $this->clearCache();
+
+        $data = [];
+        foreach ($this->doctrine->getRepository(SimpleContent::class)->findAll() as $content) {
+            $value = [];
+            foreach ($this->getLocales() as $locale) {
+                $value[$locale] = $content->translate($locale)->getValue();
+            }
+            $data[$content->getName()] = $value;
+        }
+
+        $item = $this->getCache()->getItem(self::CACHE_KEY);
+        $item->set($data);
+        $this->getCache()->save($item);
+
+        return $data;
+    }
+
     public function clearCache(): void
     {
         $cache = $this->getCache();

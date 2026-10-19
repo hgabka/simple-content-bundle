@@ -57,6 +57,7 @@ class SimpleContentManagerTest extends TestCase
 
             return $this->store[$criteria['name']] ?? null;
         });
+        $repository->method('findAll')->willReturnCallback(fn (): array => array_values($this->store));
         $doctrine = $this->createStub(Registry::class);
         $doctrine->method('getRepository')->willReturn($repository);
 
@@ -142,6 +143,21 @@ class SimpleContentManagerTest extends TestCase
     public function testRemovingUnknownNameIsHarmless(): void
     {
         $this->assertTrue($this->manager()->removeFromCache('nothing'));
+    }
+
+    public function testCacheDataIsRebuiltFromTheDatabaseAfterTheCacheWasCleared(): void
+    {
+        $this->content('footer', ['hu' => 'Lábléc', 'en' => 'Footer']);
+        $manager = $this->manager();
+        $manager->getContent('footer');
+
+        $manager->clearCache();
+        $this->content('header', ['hu' => 'Fejléc', 'en' => 'Header']);
+
+        $this->assertSame(
+            ['footer' => ['hu' => 'Lábléc', 'en' => 'Footer'], 'header' => ['hu' => 'Fejléc', 'en' => 'Header']],
+            $manager->getCacheData()
+        );
     }
 
     public function testLocalesComeFromUtils(): void
