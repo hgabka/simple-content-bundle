@@ -19,8 +19,7 @@
         "hgabka/doctrine-translatable-bundle": "^7.1|^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.*",
-        "mockery/mockery": "^0.9.4"
+        "phpunit/phpunit": "^10.5|^11.0|^12.0|^13.0"
     },
     "autoload": {
         "psr-4": {
@@ -29,7 +28,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Hgabka\\SimpleContentBundle\\Tests\\": "tests"
+            "Hgabka\\SimpleContentBundle\\Tests\\\\": "tests/"
         }
     },
     "scripts": {
