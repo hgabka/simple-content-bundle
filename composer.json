@@ -28,7 +28,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Hgabka\\SimpleContentBundle\\Tests\\\\": "tests/"
+            "Hgabka\\SimpleContentBundle\\Tests\\": "tests/"
         }
     },
     "scripts": {
