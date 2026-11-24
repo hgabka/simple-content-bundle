@@ -15,6 +15,21 @@ Hgabka\SimpleContentBundle\HgabkaSimpleContentBundle::class => ['all' => true],
 
 Függőségek: Symfony 7/8, `hgabka/utils-bundle`, `hgabka/doctrine-translatable-bundle`, Sonata Admin (az admin felülethez). Az entitások (`hg_simple_content`, `hg_simple_content_translation`) táblái Doctrine migrációval/schema update-tel hozhatók létre.
 
+### Repók
+
+A hgabka csomagok nem szerepelnek a Packagiten, ezért a projekt `composer.json`-jában fel kell venni a repóikat (a függőségek saját `repositories` mezőjét a Composer nem olvassa). A repók nyilvánosak, az `https` url-ekhez nem kell SSH kulcs. Aki GitHub SSH kulccsal dolgozik, használhatja a `git@github.com:hgabka/<név>.git` url-eket is. Kulcs nélkül az anonim GitHub API kérés-limit (60/óra) miatt a Composer előbb-utóbb tokent kérhet.
+
+```json
+"repositories": [
+    {"type": "vcs", "url": "https://github.com/hgabka/utils-bundle.git"},
+    {"type": "vcs", "url": "https://github.com/hgabka/doctrine-translatable.git"},
+    {"type": "vcs", "url": "https://github.com/hgabka/doctrine-translatable-bundle.git"},
+    {"type": "vcs", "url": "https://github.com/hgabka/acl-bundle.git"},
+    {"type": "vcs", "url": "https://github.com/hgabka/security-acl.git"},
+    {"type": "vcs", "url": "https://github.com/hgabka/simple-content-bundle.git"}
+]
+```
+
 ## Konfiguráció
 
 ```yaml
@@ -52,3 +67,16 @@ A `SimpleContentAdmin` Sonata admin (csoport: `hg_simple_content.group`) listáz
 - `SimpleContentTranslation` – `description`, `value`
 
 Fordítások: `Resources/translations` (`hu`, `en`).
+
+## Tesztek
+
+A `require-dev` tartalmazza a szükséges csomagokat, a hgabka bundle-ök repóit a `composer.json` `repositories` szekciója adja, így a bundle önmagában is telepíthető és tesztelhető (a `git@github.com:...` url-ekhez SSH kulcs kell, kulcs nélkül cseréld őket `https://github.com/...`-ra):
+
+```bash
+composer install
+vendor/bin/phpunit
+```
+
+## Licenc
+
+MIT, lásd: [LICENSE](LICENSE).
